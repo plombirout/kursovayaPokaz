@@ -14,10 +14,10 @@ namespace kursovayaPokaz.Models
             [JsonProperty("Показатель")]
             public string Indicator { get; set; }
 
-            [JsonProperty("Начало")]
+            [JsonProperty("31.12.2022")]
             public double Value2022 { get; set; }
 
-            [JsonProperty("Конец")]
+            [JsonProperty("31.12.2023")]
             public double Value2023 { get; set; }
         
     }

@@ -1,0 +1,15 @@
+﻿<UserControl x:Class="kursovayaPokaz.Views.Controls.Other.ToolBarControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:kursovayaPokaz.Views.Controls.Other"
+             DataContext="{Binding ToolBarControlModel, Source={StaticResource Locator}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Grid>
+        <Label Content="{Binding SelectedFile}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5"/>
+        <Button Content="Create graph" HorizontalAlignment="Right" VerticalAlignment="Center" Height="35" Width="100" Margin="5"/>
+    </Grid>
+</UserControl>

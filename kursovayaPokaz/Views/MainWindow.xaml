@@ -3,22 +3,48 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:RightBarControl="clr-namespace:kursovayaPokaz.Views.Controls.SelectStage"
+        xmlns:TableViewControl="clr-namespace:kursovayaPokaz.Views.Controls.Tables"
+        xmlns:BottomBarControl="clr-namespace:kursovayaPokaz.Views.Controls.Other"
+        DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         xmlns:local="clr-namespace:kursovayaPokaz"
-        xmlns:vm ="clr-namespace:kursovayaPokaz.ViewModels"
         mc:Ignorable="d"
-        Title="MainWindow" Height="500
-" Width="800">
-    <Window.DataContext>
-        <vm:MainWindowViewModel/>
-    </Window.DataContext>
+        Background="#FF1E1E1E"
+        Title="MainWindow" Height="500" Width="800">
+    
+    <DockPanel>
+        <BottomBarControl:ToolBarControl DockPanel.Dock="Bottom" Height="40"/>
 
+        <Grid DockPanel.Dock="Top">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-    <Grid>
-      
-        <TextBlock RenderTransformOrigin="0.392,0.454" Text="{Binding Title}" Grid.ColumnSpan="4" HorizontalAlignment="Left" Width="831"/>
-        <Button Command="{Binding SwitchReceivingModeCommand}" Margin="21,53,461,358" Content="Основные показатели"/>
-        <TextBlock Text="{Binding variable}" Margin="456,10,214,401" RenderTransformOrigin="1.274,1.005"/>
-        <TextBlock  Text="{Binding variable1}" Margin="558,121,99,296"/>
-        
-    </Grid>
+                <!--Верхнее меню-->
+                <Menu Grid.Row="0">
+                    <!--Меню выбора файла-->
+                    <MenuItem Header="File">
+                        <MenuItem Header="Select file" Command="{Binding OpenFileCommand}"/>
+                    </MenuItem>
+
+                    <!--Меню настроек-->
+                    <MenuItem Header="Settings">
+                        <MenuItem Header="Undefined"/>
+                    </MenuItem>
+                </Menu>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <RightBarControl:SelectStageControl Grid.Column="0" Width="250" HorizontalAlignment="Left" Margin="5"/>
+                    <TableViewControl:TableViewControl Grid.Column="1" Margin="5"/>
+                </Grid>
+            </Grid>
+        </Grid>
+    </DockPanel>
 </Window>

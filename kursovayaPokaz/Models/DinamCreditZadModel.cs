@@ -14,16 +14,16 @@ namespace kursovayaPokaz.Models
         [JsonProperty("Состав кредиторской задолженности")]
         public string SostavKreditZad { get; set; }
 
-        [JsonProperty("сумма, тыс. р. На начало")]
+        [JsonProperty("сумма, тыс. р. на начало")]
         public double ValueSummNach { get; set; }
 
-        [JsonProperty("удельный вес, % На начало")]
+        [JsonProperty("удельный вес, % на начало")]
         public double ValueVesNach { get; set; }
 
-        [JsonProperty("сумма, тыс. р. На конец")]
+        [JsonProperty("сумма, тыс. р. на конец")]
         public double ValueSummKon { get; set; }
 
-        [JsonProperty("удельный вес, % На конец")]
+        [JsonProperty("удельный вес, % на конец")]
         public double ValueVesKon { get; set; }
 
         [JsonProperty("по сумме, тыс. р.")]

@@ -23,17 +23,17 @@ namespace kursovayaPokaz.Services.ParsingServices
             catch (Exception ex) { return false; }
             indicates = new Dictionary<string, ExcelData>
             {
-                ["Долгосрочная кредиторская задолженность"] = (ExcelData)data[1],
-                ["Краткосрочная кредиторская задолженность "] = (ExcelData)data[2],
-                ["В том числе: поставщикам, подрядчикам, исполнителям, "] = (ExcelData)data[3],
-                ["по авансам полученным"] = (ExcelData)data[4],
-                ["по налогам и сборам"] = (ExcelData)data[5],
-                ["по соц. страхованию и обеспечению"] = (ExcelData)data[6],
-                ["по оплате труда"] = (ExcelData)data[7],
-                ["по лизинговым платежам"] = (ExcelData)data[8],
-                ["собственнику имущества"] = (ExcelData)data[9],
-                ["прочим кредиторам"] = (ExcelData)data[10],
-                ["Итого кредиторская задолженность"] = (ExcelData)data[11]
+                ["Долгосрочная кредиторская задолженность"] = (ExcelData)data[0],
+                ["Краткосрочная кредиторская задолженность "] = (ExcelData)data[1],
+                ["В том числе: поставщикам, подрядчикам, исполнителям, "] = (ExcelData)data[2],
+                ["по авансам полученным"] = (ExcelData)data[3],
+                ["по налогам и сборам"] = (ExcelData)data[4],
+                ["по соц. страхованию и обеспечению"] = (ExcelData)data[5],
+                ["по оплате труда"] = (ExcelData)data[6],
+                ["по лизинговым платежам"] = (ExcelData)data[7],
+                ["собственнику имущества"] = (ExcelData)data[8],
+                ["прочим кредиторам"] = (ExcelData)data[9],
+                ["Итого кредиторская задолженность"] = (ExcelData)data[10]
             };
             return true;
         }

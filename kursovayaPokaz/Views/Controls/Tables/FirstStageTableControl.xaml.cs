@@ -1,8 +1,6 @@
-﻿using kursovayaPokaz.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace kursovayaPokaz
+namespace kursovayaPokaz.Views.Controls.Tables
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для FirstStageTableControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class FirstStageTableControl : UserControl
     {
-        public MainWindow()
+        public FirstStageTableControl()
         {
             InitializeComponent();
-            // В MainWindow.xaml.cs
-          
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

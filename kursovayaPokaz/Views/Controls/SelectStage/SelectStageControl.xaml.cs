@@ -1,8 +1,6 @@
-﻿using kursovayaPokaz.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,23 +13,16 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace kursovayaPokaz
+namespace kursovayaPokaz.Views.Controls.SelectStage
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Логика взаимодействия для SelectStageControl.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class SelectStageControl : UserControl
     {
-        public MainWindow()
+        public SelectStageControl()
         {
             InitializeComponent();
-            // В MainWindow.xaml.cs
-          
-        }
-
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }
