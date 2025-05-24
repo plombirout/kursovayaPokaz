@@ -4,28 +4,25 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:kursovayaPokaz.Views.Controls.SelectStage"
+             DataContext="{Binding SelectStageControlModel, Source={StaticResource Locator}}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <GroupBox Header="Select stage">
+    <Grid>
+        <!--Делит сетку на n равных частей-->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Grid>
-            <!--Делит сетку на n равных частей-->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-
-            <Button Grid.Row="0" Content="Stage"/>
-            <Button Grid.Row="1" Content="Stage"/>
-            <Button Grid.Row="2" Content="Stage"/>
-            <Button Grid.Row="3" Content="Stage"/>
-            <Button Grid.Row="4" Content="Stage"/>
-            <Button Grid.Row="5" Content="Stage"/>
-        </Grid>
-
-    </GroupBox>
+        <Button Grid.Row="0" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
+        <Button Grid.Row="1" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
+        <Button Grid.Row="2" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
+        <Button Grid.Row="3" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
+        <Button Grid.Row="4" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
+        <Button Grid.Row="5" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
+    </Grid>
 </UserControl>

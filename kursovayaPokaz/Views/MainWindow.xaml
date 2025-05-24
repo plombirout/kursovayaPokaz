@@ -8,12 +8,12 @@
         xmlns:BottomBarControl="clr-namespace:kursovayaPokaz.Views.Controls.Other"
         DataContext="{Binding MainWindowModel, Source={StaticResource Locator}}"
         xmlns:local="clr-namespace:kursovayaPokaz"
-        mc:Ignorable="d"
-        Background="#FF1E1E1E"
-        Title="MainWindow" Height="500" Width="800">
+        Background="#444444"
+        mc:Ignorable="d"       
+        Title="Economic calculations" MinHeight="300" MinWidth="500" Height="400" Width="700">
     
     <DockPanel>
-        <BottomBarControl:ToolBarControl DockPanel.Dock="Bottom" Height="40"/>
+        <BottomBarControl:ToolBarControl DockPanel.Dock="Bottom" Height="30" Margin="5"/>
 
         <Grid DockPanel.Dock="Top">
             <Grid>
@@ -41,8 +41,8 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <RightBarControl:SelectStageControl Grid.Column="0" Width="250" HorizontalAlignment="Left" Margin="5"/>
-                    <TableViewControl:TableViewControl Grid.Column="1" Margin="5"/>
+                    <RightBarControl:SelectStageControl Grid.Column="0" Width="250" HorizontalAlignment="Left"/>
+                    <TableViewControl:TableViewControl Grid.Column="1" />
                 </Grid>
             </Grid>
         </Grid>

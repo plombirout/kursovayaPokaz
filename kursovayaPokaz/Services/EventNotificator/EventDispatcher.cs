@@ -10,6 +10,8 @@ namespace kursovayaPokaz.Services.EventNotificator
     {
         public event EventHandler<string> FileStatusChanged;
 
+        public event EventHandler<bool> ProgramStatusChanged;
+
         public void Invoke(string name, params object[] args)
         {
             if (GetType().GetField(name, System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic).GetValue(this) is not MulticastDelegate md) return;

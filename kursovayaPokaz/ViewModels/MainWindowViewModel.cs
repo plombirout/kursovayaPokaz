@@ -21,32 +21,8 @@ namespace kursovayaPokaz.ViewModels
 
     class MainWindowViewModel : ViewModel
     {
-        #region File
-        public ICommand OpenFileCommand { get; }
-
-        private void OnOpenFileExecuted(object p)
-        {
-            if (!App.services.GetRequiredService<IUserDialog>().OpenFile(""))
-            {
-                return;
-            }
-
-            var res = App.services.GetRequiredService<IUserDialog>().GetExcelFilePath(out string file);
-            SelectedFile = file;
-            if (!res)
-                return;
-
-            App.services.GetRequiredService<IEventNotification>().Invoke(nameof(IEventNotification.FileStatusChanged), this, SelectedFile);
-            IExcelSerializer serializer = new ExcelSerializerService();
-            var a = serializer.ConvertExcelToJson(SelectedFile);
-            IParsingService parser1 = new MainTable();
-            var b = parser1.Parse(a, out IDictionary<string, ExcelData> indicates);
-            var tt = indicates.TryGetValue("Объем произведенной продукции (работ, услуг) в текущих ценах, тыс. р.", out ExcelData excelData);
-            var ttt = excelData as MainTableModel;
-        }
-        private bool CanOpenFileExecute(object p) => true;
-        #endregion
-
+        #region Fields    
+        
         #region Title : string - Window title
         private string _Title = "Выполнил: Зайцев Артем Денисович, студент группы ИСИТ-221";
         public string Title { get => _Title; set => Set(ref _Title, value); }
@@ -56,43 +32,61 @@ namespace kursovayaPokaz.ViewModels
         public string SelectedFile { get => _SelectedFile; set => Set(ref _SelectedFile, value); }
 
 
+        private IUserDialog _UserDialog;
+        private IEventNotification _EventHandler;
+        #endregion
 
-
-        private double _variable;
-        public double variable { get => _variable; set => Set(ref _variable, value); }
-
-        private double _variable1;
-        public double variable1 { get => _variable1; set => Set(ref _variable1, value); }
 
         #endregion
-        #region SwitchReceivingMode
-        public ICommand SwitchReceivingModeCommand { get; }
 
-        private void OnSwitchReceivingModeExecuted(object p)
+        #region Command : OpenFileCommannd
+        public ICommand OpenFileCommand { get; }
+        private void OnOpenFileExecuted(object p)
         {
-            //osnovpokaz.parse(null, out list<osnovpokaz> osnovpokaz);
-            //variable = osnovpokaz[0].srednegodovayaviruchka;
-            //variable1 = osnovpokaz[1].srednegodovayaviruchka;
+            if (!_UserDialog.OpenFile("Select excel file"))
+                return;
 
-            //dinamcreditzad.parse(null, out list<dinamcreditzad> dinamcreditzad);
+            var res = _UserDialog.GetExcelFilePath(out string file);
+            SelectedFile = file;
+            if (!res) 
+            {            
+                _EventHandler.Invoke(nameof(IEventNotification.ProgramStatusChanged), this, false);
+                return;
+            }
 
-            //iexcelserializer serializer = new excelserializerservice();
-            //var a = serializer.convertexceltojson("c:\\users\\37529\\desktop\\1.xlsx", "основные показатели");
-            //var aa = serializer.convertexceltojson("c:\\users\\37529\\desktop\\1.xlsx", "динамика кредит. задолж");
-            //iparsingservice parser1 = new mainindicatesparsingservice();
-            //iparsingservice parser1 = new kreditzad();
-            //var b = parser1.parse(a, out idictionary<string, exceldata> indicates);
-            //var tt = indicates.trygetvalue("productionvolume", out exceldata exceldata);
-            //var ttt = exceldata as mainindicator;
+            /// вот типа так
+            IExcelSerializer serializer = new ExcelSerializerService();
+            var serialized = serializer.ConvertExcelToJson(SelectedFile);
+
+            //f tot njxytt enen
+            bool resultOfDeserialization = false;
+            try 
+            {
+                resultOfDeserialization = App.services.GetRequiredService<IParsingService>().Parse(serialized, out IDictionary<string, DeserializationModel> indicates);
+            }
+            catch(Exception ex) 
+            {
+                _EventHandler.Invoke(nameof(IEventNotification.ProgramStatusChanged), this, false);
+                return;
+            }
+
+            //var tt = indicates.TryGetValue("Объем произведенной продукции (работ, услуг) в текущих ценах, тыс. р.", out DeserializationModel excelData);
+
+            /// точнее ткт
+            _EventHandler.Invoke(nameof(IEventNotification.FileStatusChanged), this, SelectedFile);
+            _EventHandler.Invoke(nameof(IEventNotification.ProgramStatusChanged), this, true);
+
+            ///Тут вызываешь парсерр
+            /// иди нахуй и соси яйца >-)
+
+
         }
-        private bool CanSwitchReceivingModeExecute(object p) => true;
+        private bool CanOpenFileExecute(object p) => true;
         #endregion
-
-
-       
         public MainWindowViewModel()
         {
-            SwitchReceivingModeCommand = new LambdaCommand(OnSwitchReceivingModeExecuted, CanSwitchReceivingModeExecute);
+            _EventHandler = App.services.GetRequiredService<IEventNotification>();
+            _UserDialog = App.services.GetRequiredService<IUserDialog>();
             OpenFileCommand = new LambdaCommand(OnOpenFileExecuted, CanOpenFileExecute);
         }
 

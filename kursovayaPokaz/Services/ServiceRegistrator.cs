@@ -1,5 +1,6 @@
 ﻿using kursovayaPokaz.Services.EventNotificator;
 using kursovayaPokaz.Services.ExcelSerializer;
+using kursovayaPokaz.Services.ParsingServices;
 using kursovayaPokaz.Services.UserDialog;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -12,9 +13,10 @@ namespace kursovayaPokaz.Services
 {
     static class ServiceRegistrator
     {
-        public static IServiceCollection AddService(this  IServiceCollection services) => services
+        public static IServiceCollection AddService(this IServiceCollection services) => services
             .AddSingleton<IExcelSerializer, ExcelSerializerService>()
             .AddSingleton<IUserDialog, UserDialogService>()
-            .AddSingleton<IEventNotification, EventDispatcher>();
+            .AddSingleton<IEventNotification, EventDispatcher>()
+            .AddSingleton<IParsingService, MainTableParsingService>();
     }
 }
