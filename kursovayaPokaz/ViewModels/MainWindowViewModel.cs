@@ -70,10 +70,11 @@ namespace kursovayaPokaz.ViewModels
             var serialized = serializer.ConvertExcelToJson(SelectedFile);
 
             //f tot njxytt enen
+            IDictionary<string, DeserializationModel> indicates = null;
             bool resultOfDeserialization = false;
             try 
             {
-                resultOfDeserialization = App.services.GetRequiredService<IParsingService>().Parse(serialized, out IDictionary<string, DeserializationModel> indicates);
+                resultOfDeserialization = App.services.GetRequiredService<IParsingService>().Parse(serialized, out indicates);
             }
             catch(Exception ex) 
             {
@@ -86,6 +87,8 @@ namespace kursovayaPokaz.ViewModels
             /// точнее ткт
             _EventHandler.Invoke(nameof(IEventNotification.FileStatusChanged), this, SelectedFile);
             _EventHandler.Invoke(nameof(IEventNotification.ProgramStatusChanged), this, true);
+            _EventHandler.Invoke(nameof(IEventNotification.DataParsed), this, indicates);
+
 
             ///Тут вызываешь парсерр
             /// иди нахуй и соси яйца >-)

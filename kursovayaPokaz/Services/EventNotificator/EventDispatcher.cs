@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using kursovayaPokaz.Models;
 
 namespace kursovayaPokaz.Services.EventNotificator
 {
@@ -11,6 +12,8 @@ namespace kursovayaPokaz.Services.EventNotificator
         public event EventHandler<string> FileStatusChanged;
 
         public event EventHandler<bool> ProgramStatusChanged;
+
+        public event EventHandler<Dictionary<string, DeserializationModel>> DataParsed;
 
         public void Invoke(string name, params object[] args)
         {

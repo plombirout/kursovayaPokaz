@@ -8,6 +8,6 @@ namespace kursovayaPokaz.Models
 {
     internal class MainIndicatesModel
     {
-    
+        public Dictionary<string, DeserializationModel> Models { get; set; }
     }
 }
