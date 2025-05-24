@@ -16,6 +16,7 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <Button Grid.Row="0" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
@@ -24,5 +25,6 @@
         <Button Grid.Row="3" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
         <Button Grid.Row="4" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
         <Button Grid.Row="5" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
+        <Button Grid.Row="6" Content="Stage" IsEnabled="{Binding IsCorrectFile}"/>
     </Grid>
 </UserControl>

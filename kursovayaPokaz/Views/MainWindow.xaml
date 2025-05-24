@@ -30,8 +30,10 @@
                     </MenuItem>
 
                     <!--Меню настроек-->
+                    <!-- Меню настроек -->
                     <MenuItem Header="Settings">
-                        <MenuItem Header="Undefined"/>
+                        <MenuItem Header="Настройки организации" 
+              Command="{Binding OpenSettingsCommand}"/>
                     </MenuItem>
                 </Menu>
 

@@ -1,0 +1,63 @@
+﻿<Window x:Class="kursovayaPokaz.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Настройки организации" 
+        Height="247" 
+        Width="400"
+        WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Название организации -->
+        <TextBlock Text="Название организации*:" Grid.Row="0" Grid.Column="0" Margin="0 0 5 5"/>
+        <TextBox x:Name="OrgNameInput" Grid.Row="0" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!-- УНП -->
+        <TextBlock Text="УНП*:" Grid.Row="1" Grid.Column="0" Margin="0 0 5 5"/>
+        <TextBox x:Name="UNPInput" Grid.Row="1" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!-- Вид деятельности -->
+        <TextBlock Text="Вид деятельности:" Grid.Row="2" Grid.Column="0" Margin="0 0 5 5"/>
+        <TextBox x:Name="ActivityInput" Grid.Row="2" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!-- Юридический адрес -->
+        <TextBlock Text="Юридический адрес:" Grid.Row="3" Grid.Column="0" Margin="0 0 5 5"/>
+        <TextBox x:Name="AddressInput" Grid.Row="3" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!-- Директор -->
+        <TextBlock Text="Директор:" Grid.Row="4" Grid.Column="0" Margin="0 0 5 5"/>
+        <TextBox x:Name="DirectorInput" Grid.Row="4" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!-- Главный бухгалтер -->
+        <TextBlock Text="Главный бухгалтер:" Grid.Row="5" Grid.Column="0" Margin="0 0 5 5"/>
+        <TextBox x:Name="AccountantInput" Grid.Row="5" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!-- Ответственный исполнитель -->
+        <TextBlock Text="Ответственный исполнитель:" Grid.Row="6" Grid.Column="0" Margin="0 0 5 5"/>
+        <TextBox x:Name="ExecutorInput" Grid.Row="6" Grid.Column="1" Margin="0 0 0 5"/>
+
+        <!-- Кнопка Сохранить -->
+        <Button Content="Сохранить" 
+                Grid.Row="9" 
+                Width="100" 
+                HorizontalAlignment="Right"
+                Margin="0,10,140,0"
+                Click="SaveButton_Click" RenderTransformOrigin="-1.088,0.491" Height="20" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+    </Grid>
+</Window>

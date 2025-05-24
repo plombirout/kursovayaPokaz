@@ -1,4 +1,5 @@
 ﻿using DocumentFormat.OpenXml.Wordprocessing;
+using GalaSoft.MvvmLight.Command;
 using kursovayaPokaz.Commands;
 using kursovayaPokaz.Models;
 using kursovayaPokaz.Services.EventNotificator;
@@ -21,8 +22,18 @@ namespace kursovayaPokaz.ViewModels
 
     class MainWindowViewModel : ViewModel
     {
+        public ICommand OpenSettingsCommand => new RelayCommand(() =>
+        {
+            var settingsWindow = new SettingsWindow();
+            if (settingsWindow.ShowDialog() == true)
+            {
+                // Сохранение настроек
+                var settings = settingsWindow.Settings;
+                // Здесь можно добавить логику сохранения в модель
+            }
+        });
         #region Fields    
-        
+
         #region Title : string - Window title
         private string _Title = "Выполнил: Зайцев Артем Денисович, студент группы ИСИТ-221";
         public string Title { get => _Title; set => Set(ref _Title, value); }
@@ -70,7 +81,7 @@ namespace kursovayaPokaz.ViewModels
                 return;
             }
 
-            //var tt = indicates.TryGetValue("Объем произведенной продукции (работ, услуг) в текущих ценах, тыс. р.", out DeserializationModel excelData);
+           // var tt = indicates.TryGetValue("Объем произведенной продукции (работ, услуг) в текущих ценах, тыс. р.", out DeserializationModel excelData);
 
             /// точнее ткт
             _EventHandler.Invoke(nameof(IEventNotification.FileStatusChanged), this, SelectedFile);
