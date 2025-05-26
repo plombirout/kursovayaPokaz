@@ -100,7 +100,7 @@ namespace kursovayaPokaz.Services.ParsingServices
             indicates.TryGetValue("Среднегодовая стоимость основных средств, тыс. р.", out val2);
             ReturnOnFixedAssets.Year2022 = (val1.Year2022 ?? 0) / (val2.Year2022 ?? 0);
             ReturnOnFixedAssets.Year2023 = (val1.Year2023 ?? 0) / (val2.Year2023 ?? 0);
-
+            indicates.Add("Фондоотдача основных средств, р./р.", ReturnOnFixedAssets);
 
             var ProductProfitability = new DeserializationModel();
             ProductProfitability.Indicator = " Рентабельность продукции, %";
@@ -108,6 +108,8 @@ namespace kursovayaPokaz.Services.ParsingServices
             indicates.TryGetValue(" Себестоимость реализованных товаров, продукции, работ, услуг, тыс. р.", out val2);
             ProductProfitability.Year2022 = (val1.Year2022 ?? 0) / (val2.Year2022 ?? 0) * 100;
             ProductProfitability.Year2023 = (val1.Year2023 ?? 0) / (val2.Year2023 ?? 0) * 100;
+            indicates.Add(" Рентабельность продукции, %", ProductProfitability);
+
 
             var CurrentRatioAtTheEndOfTheYear = new DeserializationModel();
             CurrentRatioAtTheEndOfTheYear.Indicator = "Коэффициент текущей ликвидности на конец года";
@@ -115,6 +117,9 @@ namespace kursovayaPokaz.Services.ParsingServices
             indicates.TryGetValue("КРАТКОСРОЧНЫЕ ОБЯЗАТЕЛЬСТВА. ", out val2);
             CurrentRatioAtTheEndOfTheYear.Year2022 = (val1.Year2022 ?? 0) / (val2.Year2022 ?? 0);
             CurrentRatioAtTheEndOfTheYear.Year2023 = (val1.Year2023 ?? 0) / (val2.Year2023 ?? 0);
+            indicates.Add("Коэффициент текущей ликвидности на конец года", CurrentRatioAtTheEndOfTheYear);
+
+
 
             var RatioOfOwnWorkingCapitalAtTheEndOfTheYear = new DeserializationModel();
             RatioOfOwnWorkingCapitalAtTheEndOfTheYear.Indicator = "Коэффициент обеспеченности собственными оборотными средствами на конец года";
@@ -132,7 +137,7 @@ namespace kursovayaPokaz.Services.ParsingServices
                 (val2.Year2023 ?? 0) -
                 (val3.Year2023 ?? 0)) /
                 (val4.Year2023 ?? 0);
-
+            indicates.Add("Коэффициент обеспеченности собственными оборотными средствами на конец года", RatioOfOwnWorkingCapitalAtTheEndOfTheYear);
 
             var CurrentAccountsPayable = new DeserializationModel();
             CurrentAccountsPayable.Indicator = "Краткосрочная кредиторская задолженность (тыс. руб.)";
@@ -162,7 +167,7 @@ namespace kursovayaPokaz.Services.ParsingServices
     (val6.Year2023 ?? 0) +
     (val7.Year2023 ?? 0) +
     (val8.Year2023 ?? 0);
-
+            indicates.Add("Краткосрочная кредиторская задолженность (тыс. руб.)", CurrentAccountsPayable);
 
             var CurrentAccountsReceivable = new DeserializationModel();
             CurrentAccountsReceivable.Indicator = "Краткосрочная дебиторская задолженность (тыс. руб.)";
@@ -184,12 +189,15 @@ namespace kursovayaPokaz.Services.ParsingServices
     (val3.Year2023 ?? 0) +
     (val4.Year2023 ?? 0) +
     (val5.Year2023 ?? 0);
+            indicates.Add("Краткосрочная дебиторская задолженность (тыс. руб.)", CurrentAccountsReceivable);
+
+
 
             var AccountsPayableToAccountsReceivableRatio = new DeserializationModel();
             AccountsPayableToAccountsReceivableRatio.Indicator = "Соотношение кредиторской и дебиторской задолженности";
             AccountsPayableToAccountsReceivableRatio.Year2022 = CurrentAccountsPayable.Year2022 / CurrentAccountsReceivable.Year2022 * 100;
             AccountsPayableToAccountsReceivableRatio.Year2023 = CurrentAccountsPayable.Year2023 / CurrentAccountsReceivable.Year2023 * 100;
-
+            indicates.Add("Соотношение кредиторской и дебиторской задолженности", AccountsPayableToAccountsReceivableRatio);
 
             var AverageAnnualAccountsPayable = new DeserializationModel();
             AverageAnnualAccountsPayable.Indicator = "Среднегодовая кредиторская задолженность (тыс. руб.)";
@@ -197,18 +205,23 @@ namespace kursovayaPokaz.Services.ParsingServices
             indicates.TryGetValue("Кредиторская задолженность на конец года, тыс. р.", out val2);
             AverageAnnualAccountsPayable.Year2022 = ((val1.Year2022 ?? 0) + (val2.Year2022 ?? 0)) / 2;
             AverageAnnualAccountsPayable.Year2023 = ((val1.Year2023 ?? 0) + (val2.Year2023 ?? 0)) / 2;
+            indicates.Add("Среднегодовая кредиторская задолженность (тыс. руб.)", AverageAnnualAccountsPayable);
+
 
             var AccountsPayableTurnoverRatio = new DeserializationModel();
             AccountsPayableTurnoverRatio.Indicator = "Коэффициент оборачиваемости кредиторской задолженности (тыс. р.) (К об)";
             indicates.TryGetValue(" Выручка от реализации товаров, работ, услуг, тыс. р.", out val1);
             AccountsPayableTurnoverRatio.Year2022 = (val1.Year2022 ?? 0) / AverageAnnualAccountsPayable.Year2022;
             AccountsPayableTurnoverRatio.Year2023 = (val1.Year2023 ?? 0) / AverageAnnualAccountsPayable.Year2023;
+            indicates.Add("Коэффициент оборачиваемости кредиторской задолженности (тыс. р.) (К об)", AccountsPayableTurnoverRatio);
+
 
             var DurationOfOneTurnoverOfAccountsPayable = new DeserializationModel();
             DurationOfOneTurnoverOfAccountsPayable.Indicator = "Длительность одного оборота кредиторской задолженности (тыс. р.) (ДО)";
             indicates.TryGetValue(" Выручка от реализации товаров, работ, услуг, тыс. р.", out val1);
             DurationOfOneTurnoverOfAccountsPayable.Year2022 = AverageAnnualAccountsPayable.Year2022 / (val1.Year2022 ?? 0) * 360;
             DurationOfOneTurnoverOfAccountsPayable.Year2023 = AverageAnnualAccountsPayable.Year2023 / (val1.Year2023 ?? 0) * 360;
+            indicates.Add("Длительность одного оборота кредиторской задолженности (тыс. р.) (ДО)", DurationOfOneTurnoverOfAccountsPayable);
 
             var AverageAnnualAccountsReceivable = new DeserializationModel();
             AverageAnnualAccountsReceivable.Indicator = "Среднегодовая дебиторская задолженность (тыс. р.)";
@@ -216,7 +229,7 @@ namespace kursovayaPokaz.Services.ParsingServices
             indicates.TryGetValue("Дебиторская задолженность на конец года, тыс. р.", out val2);
             AverageAnnualAccountsReceivable.Year2022 = ((val1.Year2022 ?? 0) + (val2.Year2022 ?? 0)) / 2;
             AverageAnnualAccountsReceivable.Year2023 = ((val1.Year2023 ?? 0) + (val2.Year2023 ?? 0)) / 2;
-
+            indicates.Add("Среднегодовая дебиторская задолженность (тыс. р.)", AverageAnnualAccountsReceivable);
 
 
             var AccountsReceivableTurnoverRatio = new DeserializationModel();
@@ -224,28 +237,35 @@ namespace kursovayaPokaz.Services.ParsingServices
             indicates.TryGetValue(" Выручка от реализации товаров, работ, услуг, тыс. р.", out val1);
             AccountsReceivableTurnoverRatio.Year2022 = (val1.Year2022 ?? 0) / AverageAnnualAccountsReceivable.Year2022;
             AccountsReceivableTurnoverRatio.Year2023 = (val1.Year2023 ?? 0) / AverageAnnualAccountsReceivable.Year2023;
+            indicates.Add(" Выручка от реализации товаров, работ, услуг, тыс. р.)", AccountsReceivableTurnoverRatio);
+
 
             var DurationOfOneTurnoverOfAccountsReceivable = new DeserializationModel();
             DurationOfOneTurnoverOfAccountsReceivable.Indicator = "Длительность одного оборота дебиторской задолженности (тыс. р.) (ДО)";
             indicates.TryGetValue(" Выручка от реализации товаров, работ, услуг, тыс. р.", out val1);
             DurationOfOneTurnoverOfAccountsReceivable.Year2022 = AverageAnnualAccountsReceivable.Year2022 / (val1.Year2022 ?? 0) * 360;
             DurationOfOneTurnoverOfAccountsReceivable.Year2023 = AverageAnnualAccountsReceivable.Year2023 / (val1.Year2023 ?? 0) * 360;
+            indicates.Add("Длительность одного оборота дебиторской задолженности (тыс. р.) (ДО))", DurationOfOneTurnoverOfAccountsReceivable);
 
             var ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmount = new DeserializationModel();
             ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmount.Indicator = "Превышение дебиторской задолженности над кредиторской задолженностью в абсолютной сумме, тыс. р.;";
             ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmount.Year2022 = CurrentAccountsReceivable.Year2022 - CurrentAccountsPayable.Year2022;
             ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmount.Year2023 = CurrentAccountsReceivable.Year2023 - CurrentAccountsPayable.Year2023;
+            indicates.Add("Превышение дебиторской задолженности над кредиторской задолженностью в абсолютной сумме, тыс. р.;", ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmount);
 
             var ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmountAsAPercentage = new DeserializationModel();
             ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmountAsAPercentage.Indicator = "в процентах, %";
             ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmountAsAPercentage.Year2022 = CurrentAccountsReceivable.Year2022 / CurrentAccountsPayable.Year2022 * 100;
             ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmountAsAPercentage.Year2023 = CurrentAccountsReceivable.Year2023 / CurrentAccountsPayable.Year2023 * 100;
+            indicates.Add("в процентах, %", ExcessOfAccountsEeceivableOverAccountsPayableInAbsoluteAmountAsAPercentage);
+
 
             var CoverageOfTheAbsoluteAmountOfAccountsPayableBalancesWithCash = new DeserializationModel();
             CoverageOfTheAbsoluteAmountOfAccountsPayableBalancesWithCash.Indicator = "Покрытие в абсолютной сумме остатков кредиторской задолженности денежными средствами,  тыс. р.";
             indicates.TryGetValue("Денежные средства: остаток, тыс. р.", out val1);
             CoverageOfTheAbsoluteAmountOfAccountsPayableBalancesWithCash.Year2022 = CurrentAccountsPayable.Year2022 - (val1.Year2022 ?? 0);
             CoverageOfTheAbsoluteAmountOfAccountsPayableBalancesWithCash.Year2023 = CurrentAccountsPayable.Year2023 - (val1.Year2023 ?? 0);
+            indicates.Add("Покрытие в абсолютной сумме остатков кредиторской задолженности денежными средствами,  тыс. р.", CoverageOfTheAbsoluteAmountOfAccountsPayableBalancesWithCash);
             return true;
         }
     }
